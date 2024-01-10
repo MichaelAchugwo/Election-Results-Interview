@@ -4,26 +4,26 @@ key =
 url = "https://upubwlugurdogswmtlom.supabase.co";
 
 database = supabase.createClient(url, key);
-var pu_select = document.getElementById("pu-select");
+
+pu_select = document.getElementById("pu-select");
+
 
 showPollingUnits = async () => {
     let announced_pu_results = await database
         .from("announced_pu_results")
         .select("polling_unit_uniqueid, party_abbreviation, party_score");
-    console.log(announced_pu_results.data.length);
-    for(i>0, i++, i<=announced_pu_results.data.length){
-      option = document.createElement('option')
-      option.innerText = `${announced_pu_results.data[i].polling_unit_uniqueid}`
-      console.log(option)
-      pu_select.appendChild = `${option}`
-      i+1
-    }
-    // var options = announced_pu_results
-    //     .map((data) => {
-    //         return "<option>" + data.item.polling_unit_uniqueid + "</option>";
-    //     })
-    //     .join(" ");
-    // console.log(options);
-    // pu_select.appendChild(options);
+
+    const uniqueIds = new Set();
+
+    announced_pu_results.data.forEach(item => {
+        if (!uniqueIds.has(item.polling_unit_uniqueid)) {
+            const optionElement = document.createElement('option');
+            optionElement.value = item.polling_unit_uniqueid;  // Set the value attribute
+            optionElement.textContent = item.polling_unit_uniqueid;  // Set the inner text
+            pu_select.appendChild(optionElement);  // Append the option to the select element
+    
+            uniqueIds.add(item.polling_unit_uniqueid);
+        }
+    });
 };
 showPollingUnits();
