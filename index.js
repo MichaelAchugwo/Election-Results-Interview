@@ -30,6 +30,8 @@ showPollingUnits = async () => {
 showPollingUnits();
 
 const viewResults = async () => {
+    const tableContainer = document.getElementById('tableContainer');
+    tableContainer.innerHTML = ""
     let currentPu = pu_select.value
     let viewParticularResults = await database
     .from("announced_pu_results")
@@ -38,22 +40,30 @@ const viewResults = async () => {
     let resultData = viewParticularResults.data;
     const targetUniqueId = currentPu;
     const filteredData = resultData.filter((result) => result.polling_unit_uniqueid === targetUniqueId);
+    console.log(filteredData)
 
-function createTableRow() {
-    const row = document.createElement('tr');
-    const abbreviationCell = document.createElement('td');
-    abbreviationCell.textContent = filteredData.party_abbreviation;
-    console.log(abbreviationCell)
-    row.appendChild(abbreviationCell);
-    const scoreCell = document.createElement('td');
-    scoreCell.textContent = filteredData.party_score;
-    row.appendChild(scoreCell);
-}
-function appendRowsToTable(rows) {
-    rows.forEach(row => {
-        pu_results.appendChild(row);
-    });
-}
-const tableRows = filteredData.map(createTableRow);
-appendRowsToTable(tableRows);
+    const tableElement = document.createElement('table');
+    tableElement.style.margin = "auto"
+    const tableBodyElement = document.createElement('tbody');
+
+filteredData.forEach(item => {
+    const rowElement = document.createElement('tr');
+
+    // Create first table cell for property1
+    const cell1 = document.createElement('td');
+    cell1.style.padding = "10px"
+    cell1.textContent = item.party_abbreviation;
+    rowElement.appendChild(cell1);
+
+    // Create second table cell for property2
+    const cell2 = document.createElement('td');
+    cell2.style.padding = "10px"
+    cell2.textContent = item.party_score;
+    rowElement.appendChild(cell2);
+
+    // Append the row to the table body
+    tableBodyElement.appendChild(rowElement);
+});
+tableElement.appendChild(tableBodyElement);
+tableContainer.appendChild(tableElement);
 }
