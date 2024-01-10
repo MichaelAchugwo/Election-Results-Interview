@@ -54,8 +54,6 @@ function appendRowsToTable(rows) {
         pu_results.appendChild(row);
     });
 }
-
 const tableRows = filteredData.map(createTableRow);
-}
-
 appendRowsToTable(tableRows);
+}
