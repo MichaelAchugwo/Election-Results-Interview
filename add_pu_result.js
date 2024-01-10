@@ -15,34 +15,42 @@ if (month<10, day<10) {
     day = "0" + day
 }
 let currentDate = `${year}-${month}-${day}`
-let polling_unit_id = document.getElementById("polling_unit_id").value
-let party_name = document.getElementById("party_name").value
-let party_score = document.getElementById("party_score").value
-let entered_by_user = document.getElementById("entered_by_user").value
+let submitBtn = document.getElementById("submitBtn")
 
-fetch('https://api.ipify.org?format=json')
-  .then(response => response.json())
-  .then(data => {
-    let ipAddress = data.ip;
-    addPUResult(ipAddress)
-})
-  .catch(error => {
-    console.error('Error fetching IP address:', error);
+function json(url) {
+    return fetch(url).then(res => res.json());
+  }
+  
+  let apiKey = 'd7cc73ce7ba915ecaf69a2daf6e1e6bb8ddf808c7bf961eea5469abf';
+  json(`https://api.ipdata.co?api-key=${apiKey}`).then(data => {
+    ipAddress = data.ip;
+    return ipAddress;
   });
 
-addPUResult = async (e, ip) => {
-    e.preventDefault;
-    ip = ip
+const addPUResult =  async (e) => {
+    e.preventDefault()
+    let polling_unit_id = document.getElementById("polling_unit_id").value
+    let party_name = document.getElementById("party_name").value
+    let party_score = document.getElementById("party_score").value
+    let entered_by_user = document.getElementById("entered_by_user").value
     let packet = { 
-        polling_unit_id, party_name, party_score, entered_by_user, currentDate, ip
+        polling_unit_uniqueid: polling_unit_id, 
+        party_abbreviation: party_name, 
+        party_score: party_score, 
+        entered_by_user: entered_by_user, 
+        date_entered: currentDate,
+        user_ip_address: ipAddress
     }
-    data = await database
-        .from('announced_pu_results')
-        .insert([packet])
-        .select()
-    // if (data) {
-    //     alert("Polling Unit Result Added Successfully")
-    // } else {
-    //     alert("Polling Unit Result Add was unsuccessful")
-    // }      
+    try {
+        let res = await database
+        .from('announced_pu_results').insert([packet])
+        if (res) {
+            alert("Polling Unit Result Added Successfully")
+        } else {
+            alert("Polling Unit Result Add was unsuccessful")
+    }      
+    } catch(error) {
+        console.error(error)
+    }
 }
+submitBtn.addEventListener('click', addPUResult)
