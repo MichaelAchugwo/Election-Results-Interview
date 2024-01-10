@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+    <h1>Add Polling Unit Results</h1>
+    <form onsubmit="addPUResult()">
+        <h3>Result</h3>
+        <label for="polling_unit_uniqueid">Polling Unit Id</label><br>
+        <input type="number" name="polling_unit_uniqueid" id="polling_unit_id" style="margin: 10px;"><br>
+        <label for="party_abbreviation">Party Name</label><br>
+        <input type="text" name="party_abbreviation" id="party_name" style="text-transform: uppercase; margin: 10px;" /><br>
+        <label for="party_score">Party Score</label><br>
+        <input type="number" name="party_score" id="party_score" style="margin: 10px;" /><br>
+        <label for="username">Username</label><br>
+        <input type="text" name="username" id="entered_by_user" style="margin: 10px;" /><br>
+        <input type="submit" value="Add">
+    </form>
+
+    <div style="margin-top: 20px;">
+        <a href="lga_pu_results.html">Go to Local Government Results Page</a>
+        <a href="polling_unit_results.html">Go to Polling Units Results Page</a>
+    </div>
+    
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>  
+  <script src="add_pu_result.js"></script>
+</body>
+</html>

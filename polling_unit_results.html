@@ -7,17 +7,21 @@
 </head>
 <body style="text-align: center; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
     <h1>Polling Unit Results</h1>
-    <h3 style="font-weight: 400;">Select the Polling Unit you want to view it's results</h3>
+    <h3 style="font-weight: 400;">Select the Polling Unit you want to view it's results and click View</h3>
 
-    <select name="pu-select" id="pu-select" style="width: 50px; text-align: center; font-size: 20px;">
+    <select name="pu-select" id="pu-select" style="width: auto; text-align: center; font-size: 20px;">
         
     </select>
-    <button style="font-size: 20px; margin-left: 10px;" onclick="viewResults()">View Results</button>
+    <button style="font-size: 20px; margin-left: 10px;" onclick="viewPUResults()">View</button>
 
     <div id="tableContainer"></div>
 
+    <div style="margin-top: 20px;">
+        <a href="lga_pu_results.html">Go to Local Government Results Page</a>
+        <a href="add_pu_result.html">Go to Add Polling Unit Result Page</a>
+    </div>
+    
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>  
-  <script src="index.js"></script>
-    <script src="index.js"></script>
+  <script src="pu.js"></script>
 </body>
 </html>

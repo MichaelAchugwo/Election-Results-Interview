@@ -8,7 +8,6 @@ database = supabase.createClient(url, key);
 var pu_select = document.getElementById("pu-select");
 var pu_results = document.getElementById("pu-results");
 
-
 showPollingUnits = async () => {
     let announced_pu_results = await database
         .from("announced_pu_results")
@@ -29,7 +28,7 @@ showPollingUnits = async () => {
 };
 showPollingUnits();
 
-const viewResults = async () => {
+viewPUResults = async () => {
     const tableContainer = document.getElementById('tableContainer');
     tableContainer.innerHTML = ""
     let currentPu = pu_select.value
@@ -40,10 +39,10 @@ const viewResults = async () => {
     let resultData = viewParticularResults.data;
     const targetUniqueId = currentPu;
     const filteredData = resultData.filter((result) => result.polling_unit_uniqueid === targetUniqueId);
-    console.log(filteredData)
 
     const tableElement = document.createElement('table');
     tableElement.style.margin = "auto"
+    tableElement.style.marginTop = "20px"
     const tableBodyElement = document.createElement('tbody');
 
 filteredData.forEach(item => {
