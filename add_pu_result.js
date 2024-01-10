@@ -52,5 +52,9 @@ const addPUResult =  async (e) => {
     } catch(error) {
         console.error(error)
     }
+    polling_unit_id = ""
+    party_name = ""
+    party_score = ""
+    entered_by_user = ""
 }
 submitBtn.addEventListener('click', addPUResult)
